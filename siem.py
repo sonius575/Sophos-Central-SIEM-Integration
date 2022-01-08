@@ -23,11 +23,14 @@ import name_mapping
 import config
 import api_client
 import vercheck
+import requests
 
 VERSION = "2.0.1"
 QUIET = False
 MISSING_VALUE = "NA"
 DEFAULT_ENDPOINT = "event"
+SUMO_ENDPOINT = <YOUR_SUMO_ENDPOINT_URL_HERE>
+LOG_FILE_LOCATION = <YOUR_LOG_FILE_LOCATION_HERE> #Result.txt file generated in the log directory of this project
 
 SEVERITY_MAP = {"none": 0, "low": 1, "medium": 5, "high": 8, "very_high": 10}
 
@@ -411,3 +414,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+with open(LOG_FILE_LOCATION, 'rb') as f:
+    r = requests.post(SUMO_ENDPOINT, files={'result.txt': f})
